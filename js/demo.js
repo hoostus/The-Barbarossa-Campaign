@@ -51,18 +51,21 @@ var hexes = [];
 })(hexes);
 
 // fill in numbers on all hexes (to verify that the map is done properly
-(function() {
+var draw_hexnum = function() {
 	for (var x = 1; x < 20; x++) {
 		for (var y = 1; y < 14; y++) {
 			var point = get_hex_coord(y, x)
 			paper.text(point[0] + start_x, point[1] + start_y, y + ":" + x)
 		}
 	}
-});
+}
+if (false) { draw_hexnum() }
 
 // setup all the water regions on the board
 (function() {
+ 	debugger
 	var water = paper.set()
+	alert(water)
 
 	// setup the Baltic Sea
 	var deadleft = [null, 6, 6, 5, 6, 4, 4]

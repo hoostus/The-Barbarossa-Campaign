@@ -1,13 +1,13 @@
-<html>
-  <head>
+{% extends "base_generic.html" %}
+{% block title %}{{ nickname }}{% endblock %}
+
+{% block header %}
     <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="js/raphael-min.js" type="text/javascript"></script>
     <script src="js/raphael.primitives.js" type="text/javascript"></script>
     <script src="js/raphaelle.js" type="text/javascript"></script>
-  </head>
+{% endblock %}
 
-  <body>
+{% block content %}
     <script src="js/demo.js" type="text/javascript"></script>
-  </body>
-
-</html>
+{% endblock %}

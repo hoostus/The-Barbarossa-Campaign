@@ -3,18 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.2.custom.css" />
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Title Goes Here{% endblock %}</title>
+    {% block header %}{% endblock %}
 </head>
 
 <body>
-  <div id="sidebar">
-    {% block sidebar %}
-    {% endblock %}
-  </div>
-
-  <div id="content">
     {% block content %}
     {% endblock %}
-  </div>
 </body>
 </html>
