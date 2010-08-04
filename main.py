@@ -5,6 +5,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util, template
 
 import os
+import cgi
+
 from model import Game
 
 templates = os.path.join(os.path.dirname(__file__), 'templates')
@@ -22,19 +24,33 @@ class Play(webapp.RequestHandler):
 		user = users.get_current_user()
 		if user:
 			game = Game.get_by_key_name(user.user_id())
-			if game:
-				draw(self.response, 'game.html', {'nickname' : user.nickname()})
+			if not game:
+				draw(self.response, 'pick-scenario.html', {})
 			else:
-				game = Game(key_name=user.user_id(), player=user)
-				game.put()
-				self.redirect(self.request.uri)
+				draw(self.response, 'game.html', {'nickname' : user.nickname()})
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
+
+class SelectScenario(webapp.RequestHandler):
+	def post(self):
+		user = users.get_current_user()
+		if not user:
+			self.redirect('/')
+		else:
+			scenario = self.request.get('scenario')
+			historical = self.request.get('historical')
+			game = Game(key_name=user.user_id(),
+					player=user,
+					scenario=scenario,
+					historical=(historical == 'on'))
+			game.put()
+			self.redirect('/play')
 
 def main():
         application = webapp.WSGIApplication([
 		('/', Welcome),
 		('/play', Play),
+		('/select-scenario', SelectScenario),
 	], debug=True)
         util.run_wsgi_app(application)
 
