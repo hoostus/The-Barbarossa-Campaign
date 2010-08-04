@@ -61,43 +61,6 @@ var draw_hexnum = function() {
 }
 if (false) { draw_hexnum() }
 
-// setup all the water regions on the board
-(function() {
- 	debugger
-	var water = paper.set()
-	alert(water)
-
-	// setup the Baltic Sea
-	var deadleft = [null, 6, 6, 5, 6, 4, 4]
-	for (var y = 1; y < 7; y++) {
-		for (var x = 1; x < 7; x++) {
-			if (x < deadleft[y]) {
-				water.push(hexes[y][x])
-			}
-		}
-	}
-
-	// the lake by leningrad
-	water.push(hexes[2][9])
-	// the sea of azov
-	water.push(hexes[12][12])
-
-	// the black sea
-	water.push(hexes[12][10])
-	for (var x = 8; x < 13; x++) {
-		water.push(hexes[13][x])
-	}
-
-	// the caspian sea
-	water.push(hexes[10][19])
-	water.push(hexes[11][18])
-	water.push(hexes[11][19])
-	water.push(hexes[12][19])
-	water.push(hexes[13][19])
-
-	water.attr({fill: '0465BA'})
-})();
-
 // setup all the "out of bounds regions"
 (function() {
 	var endings = { 1: 13, 2: 14, 3: 16, 4: 17, 5: 16, 6: 17, 7: 18, 8: 19, 9: 18 } // after that is the Caspian sea
@@ -321,3 +284,37 @@ if (false) { draw_hexnum() }
 	fill(panzer, '#666666', 5)
 })();
 
+// setup all the water regions on the board
+(function() {
+	var water = paper.set();
+
+	// setup the Baltic Sea
+	var deadleft = [null, 6, 6, 5, 6, 4, 4]
+	for (var y = 1; y < 7; y++) {
+		for (var x = 1; x < 7; x++) {
+			if (x < deadleft[y]) {
+				water.push(hexes[y][x])
+			}
+		}
+	}
+
+	// the lake by leningrad
+	water.push(hexes[2][9])
+	// the sea of azov
+	water.push(hexes[12][12])
+
+	// the black sea
+	water.push(hexes[12][10])
+	for (var x = 8; x < 13; x++) {
+		water.push(hexes[13][x])
+	}
+
+	// the caspian sea
+	water.push(hexes[10][19])
+	water.push(hexes[11][18])
+	water.push(hexes[11][19])
+	water.push(hexes[12][19])
+	water.push(hexes[13][19])
+
+	water.attr({fill: '#0465BA'})
+})();
