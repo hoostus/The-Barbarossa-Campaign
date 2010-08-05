@@ -138,4 +138,11 @@ jQuery(document).ready(function() {
 	rumanian2.draggable()
 	rumanian2.dragStart = startFactory()
 	rumanian2.dragFinish = finishFactory(rumanian1)
+
+	// TODO: make previous unit types undraggable (i.e. when going to special, make rumanian undraggable
+	// TODO: valid drop targets for special and panzer
+	// TODO: fill in Finns (before)
+	// TODO: fill in USSR (before)
+	// TODO: fill in German line (after)
+	// TODO: add a "done" that posts all the data back
 })
