@@ -2,152 +2,134 @@
 {% block title %}Choose your scenario{% endblock %}
 
 {% block header %}
-	<script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
 	<script src="js/pick-game.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
-<h1>Select your scenario</h1>
-<p>
-	Select the scenario you want to play. No matter what scenario you pick you can choose to play
-	to the end of the war or to the end-point of any scenario.
-</p>
-<p>
-	For example:
-	<ul>
-		<li>Summer 1941 to the end of the war</li>
-		<li>Spring 1944 to the end of the war</li>
-		<li>Summer 1941 to Spring 1944</li>
-		<li>Summer 1942 to Winter 1942</li>
-		<li>and so on...</li>
-	</ul>
-</p>
+<div class="container">
+	<div class="span-24 last"><h1>Select your scenario</h1></div>
 
-<h2>Historical gameplay option</h2>
-<p>
-Some scenarios have a "historical gameplay option". If you click the button, the setup changes for that
-options will take effect. More details are present under each scenario.
-</p>
+	<div class="span-4 small">
+		<strong>Historical gameplay option</strong>
+		<p>
+		Some scenarios have a "historical gameplay option". If you click the button, the setup changes for that
+		options will take effect. More details on how this affect play are presented under each scenario.
+		</p>
+	</div>
 
+	<div class="span-14 prepend-1 append-1">
 	<div id="accordion">
-			<h3 id="barbarossa"><a href="#">Summer 1941: The Barbarossa Campaign</a></h3>
-			<div><p>
-				The full Eastern Front from beginning to bitter end.
-				</p>
-				<p>
-					<span class="historical_option">Historical gameplay option: none</span>
-				</p>
-				<p>
-				<form name="select-scenario" action="select-scenario" method="post">
-					<input type="hidden" name="scenario" value="barbarossa"/>
-					<input type="submit" value="Play This!"/>
-				</form>
-				</p>
-			</div>
+		<h3 id="barbarossa"><a href="#">Summer 1941: The Barbarossa Campaign</a></h3>
+		<div>
+			<p>
+			<form name="select-scenario" action="select-scenario" method="post">
+				<input type="hidden" name="scenario" value="barbarossa"/>
+				<input type="submit" value="Play This!"/>
+			</form>
+			</p>
 
-			<h3 id="fall_blau"><a href="#">Summer 1942: Fall Blau</a></h3>
-			<div><p>
-				"Case Blue" was the German codename used for its 1942 strategic
-				summer offensive in Southern Russia.
-				</p>
-				<p>
-				<span class="historical_option">Historical gameplay option: <em>Drive for Oil</em> is the first event
-					in this scenario.
-				</p>
+			<p>
+			<div class="small quiet">Historical gameplay option: none</div>
+			The full Eastern Front from beginning to bitter end.
+			</p>
+		</div>
 
-				<p>
+		<h3 id="fall_blau"><a href="#">Summer 1942: Fall Blau</a></h3>
+		<div>
+			<p>
 				<form name="select-scenario" action="select-scenario" method="post">
 					<input type="checkbox" name="historical" id="blau_check"/><label for="blau_check">Use Historical Option</label>
 					<input type="hidden" name="scenario" value="fall-blau"/>
 					<input type="submit" value="Play This!"/>
 				</form>
-				</p>
+			</p>
 
-			</div>
+			<p>
+				<div class="small quiet">Historical gameplay option: <em>Drive for Oil</em> is the first event in this scenario.</div>
+				"Case Blue" was the German codename for its 1942 summer offensive.
+			</p>
+		</div>
 
-			<h3 id="operation_saturn"><a href="#">Winter 1942: Operation Saturn</a></h3>
-			<div><p>
-				The success of Operation Uranus, launched on 19 November 1942, had
-				trapped 300,000 troops of General Friedrich Paulus's German 6th Army
-				and 4th Panzer Army in Stalingrad. To exploit this victory, the Soviet
-				general staff planned a winter campaign of continuous and highly
-				ambitious offensive operations, codenamed "Saturn".
-				</p>
-				<p>
-					<span class="historical_option">Historical gameplay option: none</span>
-				</p>
+		<h3 id="operation_saturn"><a href="#">Winter 1942: Operation Saturn</a></h3>
+		<div>
+			<p>
+			<form name="select-scenario" action="select-scenario" method="post">
+				<input type="hidden" name="scenario" value="operation-saturn"/>
+				<input type="submit" value="Play This!"/>
+			</form>
+			</p>
 
-				<p>
-				<form name="select-scenario" action="select-scenario" method="post">
-					<input type="hidden" name="scenario" value="operation-saturn"/>
-					<input type="submit" value="Play This!"/>
-				</form>
-				</p>
+			<p>
+			<div class="small quiet">Historical gameplay option: none</div>
+			The Soviets planned a winter campaign of continuous and
+			highly ambitious offensive operations.
+			</p>
+		</div>
 
-			</div>
-
-			<h3 id="point_kursk"><a href="#">Summer 1943: Point Kursk</a></h3>
-			<div><p>
-				The Germans hoped to shorten their lines by eliminating the Kursk
-				salient (also known as the Kursk bulge), created in the aftermath of
-				their defeat at the Battle of Stalingrad. They envisioned pincers
-				breaking through its northern and southern flanks to achieve a great
-				encirclement of Red Army forces. However, the Soviets had excellent
-				intelligence of Adolf Hitler's intentions. This and German delays to
-				wait for new weapons, mainly Tiger and Panther tanks, gave the
-				Red Army time to construct a series of defense lines and gather large
-				reserve forces for a strategic counterattack.
-				</p>
-				<span class="historical_option">Historical gameplay option: The <em>Soviet Initiative Combat</em>
-					on the first turn is in the South.
-				</p>
-				<p>
+		<h3 id="point_kursk"><a href="#">Summer 1943: Turning Point: Kursk</a></h3>
+		<div>
+			<p>
 				<form name="select-scenario" action="select-scenario" method="post">
 					<input type="checkbox" name="historical" id="kursk_check"/><label for="kursk_check">Use Historical Option</label>
-					<input type="hidden" name="scenario" value="iron-dream"/>
+					<input type="hidden" name="scenario" value="kursk"/>
 					<input type="submit" value="Play This!"/>
 				</form>
-				</p>
-			</div>
+			</p>
+			
+			<p>
+			<div class="small quiet">Historical gameplay option: The <em>Soviet Initiative Combat</em> on the first turn is in the South.</div>
+			The Germans hoped to shorten their lines with pincers breaking through the Kursk salient.  
+			</p>
+		</div>
 
-			<h3 id="destruction"><a href="#">Spring 1944: Destruction of Army Group Center</a></h3>
-			<div><p>
-				Operation Bagration was the codename for the Soviet 1944 Belorussian
-				Strategic Offensive Operation during World War II, which cleared German
-				forces from the Belorussian SSR and eastern Poland.  The operation "was
-				the most calamitous defeat of all the German armed forces in World War
-				II". By the end of the operation most of the western Soviet Union
-				had been reconquered and the Red Army had achieved footholds in Romania
-				and Poland.
-				</p>
-				<p>
-				<span class="historical_option">Historical gameplay option: The <em>Soviet Initiative Combat</em>
-					on the first two turns (Spring and Summer) are in the North.
-				</p>
-				<p>
+		<h3 id="destruction"><a href="#">Spring 1944: Destruction of Army Group Center</a></h3>
+		<div>
+			<p>
 				<form name="select-scenario" action="select-scenario" method="post">
 					<input type="checkbox" id="destruction_check"/><label for="destruction_check">Use Historical Option</label>
 					<input type="hidden" name="scenario" value="destruction"/>
 					<input type="submit" value="Play This!"/>
 				</form>
-				</p>
-			</div>
+			</p>
 
-			<h3 id="iron_dream"><a href="#">Winter 1944: End of the Iron Dream</a></h3>
-			<div><p>
-				The last year of war in Europe.
-				</p>
-				<span class="historical_option">Historical gameplay option: The <em>Soviet Initiative Combat</em>
-					on the first two turns (Winter and Spring) are in the North.
-				</p>
-				<p>
+			<p>
+			<div class="small quiet">Historical gameplay option: The <em>Soviet Initiative Combat</em> on the first two turns (Spring and Summer) are in the North.</div>
+			Operation Bagration was Germany's "most calamitous defeat".
+			</p>
+		</div>
+
+		<h3 id="iron_dream"><a href="#">Winter 1944: End of the Iron Dream</a></h3>
+		<div>
+			<p>
 				<form name="select-scenario" action="select-scenario" method="post">
 					<input type="checkbox" name="historical" id="dream_check"/><label for="dream_check">Use Historical Option</label>
 					<input type="hidden" name="scenario" value="iron-dream"/>
 					<input type="submit" value="Play This!"/>
 				</form>
-				</p>
-			</div>
+			</p>
+
+			<p>
+			<div class="small quiet">Historical gameplay option: The <em>Soviet Initiative Combat</em> on the first two turns (Winter and Spring) are in the North.</div>
+			The last year of war in Europe.
+			</p>
+		</div>
+	</div>
+	</div>
+
+	<div class="span-4 last quiet small">
+		<p>
+		No matter what scenario you pick you can choose to play to the end of the
+		war or to the end-point of any scenario.
+		</p>
+		<p>
+		For example:
+		<ul class="box">
+			<li>Summer 1941 to the end of the war</li>
+			<li>Spring 1944 to the end of the war</li>
+			<li>Summer 1941 to Spring 1944</li>
+			<li>Summer 1942 to Winter 1942</li>
+			<li>and so on...</li>
+		</ul>
+		</p>
 	</div>
 {% endblock %}

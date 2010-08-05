@@ -2,34 +2,56 @@
 {% block title %}The Barbarossa Campaign{% endblock %}
 
 {% block content %}
-<h1>Play</h1>
-<p><a href="/play">Click to play <em>The Barbarossa Campaign</em></a></p>
+<div class="container">
+	<div class="span-24 last"><h1>The Barbarossa Campaign</h1></div>
 
-<h1>You, Alone, and The Russian Front</h1>
+	<div class="span-3 quiet">
+		<div class="small">
+			<p>Victory Point Games'
+			<a href="http://victorypointgames.com/details.php?prodId=99">The Barbarossa Campaign</a> a
+			"hex and counter" boardgame designed for solitaire wargaming.</p>
 
-<p>
-The Barbarossa Campaign recalls the titanic struggle on the Russian Front of
-World War II as no other wargame has presented it before&mdash;as a story filled
-with drama and pathos using a novel new solitaire gaming system that puts you,
-the Axis Player, in command facing momentous events&mdash;sometimes history’s
-master, and at other times its pawn.
-</p>
+			<p>Each unit represents 1-2 Axis Corps or 1-2 Soviet armies; each hex is 90 miles; each
+			turn is one season (three months) of real time.</p>
+		</div>
+	</div>
 
-<p>
-Featuring a dynamic game engine, where you must attempt to collapse the Soviet
-Union against all odds&mdash;where the cunning strategies you devise while
-directing your panzer thrusts eastward or offering fanatical resistance as the
-Red Army pushes relentlessly back, you will bask in a fresh, new retelling of
-this epic story each time the game is played.
-</p>
+	<div class="span-13 prepend-1 colborder">
+	<h2>You, Alone, and The Russian Front</h2>
+	<p>
+	The Barbarossa Campaign recalls the titanic struggle on the Russian Front of
+	World War II as no other wargame has presented it before&mdash;as a story filled
+	with drama and pathos using a novel new solitaire gaming system that puts you,
+	the Axis Player, in command facing momentous events&mdash;sometimes history’s
+	master, and at other times its pawn.
+	</p>
 
-<p>
-Plumb the possibilities offered in The Barbarossa Campaign where myriad
-historical “What ifs?” are constantly explored and where you will be swept away
-by the ebb and flow of vast battles that can be swiftly mastered after
-encountering rules of only moderate difficulty. It is time to revel in your
-hobby again with this fast-moving, innovative Russian Front wargame built for
-fun and enjoy the “story” in history afresh every time you play it.
-</p>
+	<p>
+	Featuring a dynamic game engine, where you must attempt to collapse the Soviet
+	Union against all odds&mdash;where the cunning strategies you devise while
+	directing your panzer thrusts eastward or offering fanatical resistance as the
+	Red Army pushes relentlessly back, you will bask in a fresh, new retelling of
+	this epic story each time the game is played.
+	</p>
 
+	<p>
+	Plumb the possibilities offered in The Barbarossa Campaign where myriad
+	historical “What ifs?” are constantly explored and where you will be swept away
+	by the ebb and flow of vast battles that can be swiftly mastered after
+	encountering rules of only moderate difficulty. It is time to revel in your
+	hobby again with this fast-moving, innovative Russian Front wargame built for
+	fun and enjoy the “story” in history afresh every time you play it.
+	</p>
+</div>
+
+<div class="span-4 last">
+	<form name="start-playing" action="/play" method="get">
+		<p>
+		<input type="submit" value="Click to play"/>
+		</p>
+	</form>
+	<img src="images/tbc-card-back.jpg"/>
+</div>
+
+</div>
 {% endblock %}

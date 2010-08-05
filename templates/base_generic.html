@@ -2,13 +2,26 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.2.custom.css" />
-    <title>{% block title %}Title Goes Here{% endblock %}</title>
-    {% block header %}{% endblock %}
+	<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">	
+	<!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+	<script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+
+	<script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="css/theme/jquery-ui-1.8.2.custom.css" />
+
+	<script src="js/jquery.showMessage.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="css/jquery.showMessage-2.1.css" />
+
+	<script src="js/ui-setup.js" type="text/javascript"></script>
+
+	<title>{% block title %}Title Goes Here{% endblock %}</title>
+	{% block header %}{% endblock %}
 </head>
 
 <body>
-    {% block content %}
-    {% endblock %}
+	{% block content %}
+	{% endblock %}
 </body>
 </html>
