@@ -7,8 +7,24 @@
 	<script src="js/raphaelle.js" type="text/javascript"></script>
 
 	<script src="js/map.js" type="text/javascript"></script>
+	<script src="js/setup.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
-	<script src="js/demo.js" type="text/javascript"></script>
+	<div id="instructions" class="hide">
+		Setup is a three-step process for the Axis.
+		<ol>
+			<li id="step-1">Place your two Rumanian units.</li>
+			<li id="step-2">Place your one special unit.</li>
+			<li id="step-3">Place your three Panzer units.</li>
+		</ol>
+		The remaining spaces will be filled in by "line" units.
+	</div>
+
+	<div id="rumanian" class="hide">
+		<p>You have two (2) Axis Allied Rumanian units available for placement.</p>
+		
+		<p>They <strong>must</strong> be placed within Rumania. This is the currently highlighted region
+		of the map.</p>
+	</div>
 {% endblock %}

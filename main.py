@@ -31,7 +31,7 @@ class Play(webapp.RequestHandler):
 			if not game:
 				draw(self.response, 'pick-scenario.html', {})
 			elif game.setup():
-				draw(self.response, 'game.html', {'nickname' : user.nickname()})
+				draw(self.response, 'setup.html', {'nickname' : user.nickname()})
 			elif game.playing():
 				draw(self.response, 'game.html', {'nickname' : user.nickname()})
 			elif game.finished():

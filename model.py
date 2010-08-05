@@ -1,6 +1,5 @@
 # vim:ts=8 sw=8 noet
 from google.appengine.ext import db
-import scenario
 
 class Game(db.Model):
 	player = db.UserProperty(required=True)
@@ -27,7 +26,7 @@ class Game(db.Model):
 	state = db.StringProperty(default='setup',
 			choices=set([ 'setup', 'playing', 'complete' ]))
 
-	scenario = db.StringProperty(default='barbarossa', choices=set(scenario.scenarios.keys()))
+	scenario = db.StringProperty(default='barbarossa'), # TODO: recursive depend... choices=set(scenario.scenarios.keys()))
 
 	def finished(self):
 		return self.state == 'complete'
@@ -35,3 +34,9 @@ class Game(db.Model):
 		return self.state == 'setup'
 	def playing(self):
 		return self.state == 'playing'
+
+class Piece(db.Model):
+	game = db.ReferenceProperty(Game, required=True)
+	type = db.StringProperty()
+	x = db.IntegerProperty(required=True, choices=range(1, 20))
+	y = db.IntegerProperty(required=True, choices=range(1, 14))

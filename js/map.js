@@ -13,9 +13,10 @@ var build_map = function(paper, debug) {
 		var new_hex = paper.polygon(start_x + x, start_y + y, width, hex_sides)
 		new_hex.attr({fill: 'white'})
 		new_hex.hover(function(event) {
+			this.ostroke_width = this.attr('stroke-width') || 1
 			this.attr({'stroke-width' : 7})
 		}, function(event) {
-			this.attr({'stroke-width' : 1})
+			this.attr({'stroke-width' : this.ostroke_width})
 		})
 		return new_hex
 	}
@@ -39,9 +40,9 @@ var build_map = function(paper, debug) {
 
 	// build hex grid
 	(function(hexes) {
-		for (var y = 1; y <= 13; y++) {
+		for (var y = 1; y <= num_hexes_tall; y++) {
 			hexes[y] = []
-			for (var x = 1; x <= 19; x++) {
+			for (var x = 1; x <= num_hexes_wide; x++) {
 				var coord = get_hex_coord(y, x)
 				var new_hex = hex(coord[0], coord[1])
 				new_hex.map_coords = [y, x]
@@ -95,8 +96,8 @@ var build_map = function(paper, debug) {
 
 		// the lake by leningrad
 		water.push(hexes[2][9])
-		// the sea of azov
-		water.push(hexes[12][12])
+		// the sea of azov ... can units actually go here?
+		//water.push(hexes[12][12])
 
 		// the black sea
 		water.push(hexes[12][10])
@@ -257,5 +258,5 @@ var build_map = function(paper, debug) {
 		river.attr({stroke : 'red', 'stroke-width' : 5})
 	})();
 
-	return hexes
+	return hexes;
 }

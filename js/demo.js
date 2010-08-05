@@ -1,7 +1,7 @@
 // vim:ts=8 sw=8 noet
 var paper = Raphael(0, 0, 2000, 1000);
 
-build_map(paper, false)
+build_map(paper, true)
 
 // 1941 setup
 (function() {

@@ -1,3 +1,6 @@
+# vim:ts=8 sw=8 noet
+from model import Piece
+
 class Scenario(object):
 	def setup(self, game):
 		""" Setup needs to take care:
@@ -43,6 +46,19 @@ class Barbarossa(Scenario):
 
 		game.state = 'setup'
 
+		self.ussr_line = [
+			[1, 8], [2, 8],
+			[5, 4], [5, 5], [6, 6], [7, 5], [8, 6], [9, 6],
+			[10, 6], [10, 7], [10, 8], [11, 8], [12, 9]
+		]
+
+		self.sevastopol = 'fortified'
+
+		self.finns = [[1, 7], [2, 7]]
+
+		self.rumanian_setup = [[12, 8], [11, 7], [11, 6]]
+		self.german_setup = [[6, 5], [7, 4], [8, 5], [9, 5]]
+
 class FallBlau(Scenario):
 	def setup(self, game):
 		game.turn = 5
@@ -83,7 +99,6 @@ class Destruction(Scenario):
 
 		game.state = 'playing'
 
-
 class IronDream(Scenario):
 	def setup(self, game):
 		game.turn = 15
@@ -104,6 +119,22 @@ class IronDream(Scenario):
 
 		game.state = 'playing'
 
+		self.hedgehogs = [[5, 4], [6, 4], [12, 4]]
+		self.guard = [[6, 5], [12, 5]]
+		self.guard_tank = [[7, 5], [9, 5]]
+		self.tank = [[10, 5], [11, 4]]
+		self.shock = [[8, 6], [13, 3]]
+		self.ussr_line = [[5, 5], [13, 4]]
+
+		self.hungarian = [[12, 3], [12, 4]]
+		self.motorized = [[7, 3]]
+		self.panzer = [[8, 5]]
+		self.elite_panzer = [[11, 3]]
+		self.german_line = [[5, 4], [7, 4], [9, 4], [10, 4], [13, 2]]
+
+		# defense >1 at Prague
+		# defense >1 at Berlin
+		# Berlin logistics at Berlin
 
 class Kursk(Scenario):
 	def setup(self, game):
