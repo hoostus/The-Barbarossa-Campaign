@@ -1,31 +1,33 @@
 # vim:ts=8 sw=8 noet
 from google.appengine.ext import db
+import scenario
 
 class Game(db.Model):
 	player = db.UserProperty(required=True)
 	date_started = db.DateTimeProperty(auto_now_add=True)
 	last_move = db.DateTimeProperty()
 	historical_option = db.BooleanProperty(default=False)
-	turn = db.IntegerProperty(required=True, choices=range(1, 19))
 
-	phase = db.IntegerProperty(required=True
+	turn = db.IntegerProperty(choices=range(1, 19))
+	phase = db.IntegerProperty()
+	luftwaffe = db.IntegerProperty()
+	vp = db.IntegerProperty()
+	initiative = db.IntegerProperty(choices=range(-14, 7))
+
+	axis_armor_track = db.IntegerProperty(choices=range(0, 6))
+	eliminated_panzer_units = db.IntegerProperty(choices=range(0,5))
+	axis_strategic_mode = db.StringProperty(choices=set([
+		'reserve-offensive', 'defense', 'logistics', 'tank-production', 'economic-warfare', 'exploitation'
+		]))
+
+	soviet_armor_track = db.IntegerProperty(choices=range(0, 6))
+	soviet_industry_track = db.IntegerProperty(choices=range(0, 6))
+	soviet_lend_lease_track = db.IntegerProperty(choices=range(0, 6))
 
 	state = db.StringProperty(default='setup',
-			choices=set([
-				'setup',
-				'playing',
-				'complete'
-			])
-	)
+			choices=set([ 'setup', 'playing', 'complete' ]))
 
-	scenario = db.StringProperty(default='barbarossa',
-		choices=set([
-			'barbarossa',
-			'fall-blau',
-			'kursk',
-			'operation-saturn',
-			'destruction',
-			'iron-dream']))
+	scenario = db.StringProperty(default='barbarossa', choices=set(scenario.scenarios.keys()))
 
 	def finished(self):
 		return self.state == 'complete'
