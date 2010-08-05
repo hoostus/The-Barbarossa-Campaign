@@ -5,9 +5,6 @@ build_map(paper, true)
 
 // 1941 setup
 (function() {
-	var rect_size = width * 1.2
-	var rect_offset = 25
-
 	var fill = function (units, color, extra_offset) {
 		var extra_offset = extra_offset || 0
 		for (u in units) {

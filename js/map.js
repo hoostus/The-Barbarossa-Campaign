@@ -1,16 +1,40 @@
+var map_constants = {
+	width : 40,
+
+	num_hexes_wide : 19,
+	num_hexes_tall : 13,
+
+	start_x : 50,
+	start_y : 50,
+
+	rect_size : 40 * 1.2,
+	rect_offset : 25
+}
+
+// given Y, X (map grid) return X, Y (canvas space)
+var get_xy = (function() {
+	var offset = 1.77 * map_constants.width
+
+	var jag = function(row) {
+		if (row % 2 == 0) {
+			return 0
+		} else {
+			return offset / 2
+		}
+	}
+
+	return function(y, x) {
+		return [(x * offset) + jag(y), y * offset * 0.865]
+	}
+})();
+
 var build_map = function(paper, debug) {
 	var debug = debug || false
 
-	var num_hexes_wide = 19;
-	var num_hexes_tall = 13;
-
-	var start_x = 50;
-	var start_y = 50;
-	var width = 40;
 	var hex_sides = 6;
 
 	var hex = function(x, y) {
-		var new_hex = paper.polygon(start_x + x, start_y + y, width, hex_sides)
+		var new_hex = paper.polygon(map_constants.start_x + x, map_constants.start_y + y, map_constants.width, hex_sides)
 		new_hex.attr({fill: 'white'})
 		new_hex.hover(function(event) {
 			this.ostroke_width = this.attr('stroke-width') || 1
@@ -21,29 +45,15 @@ var build_map = function(paper, debug) {
 		return new_hex
 	}
 
-	var offset = 1.77 * width
-
-	// given Y, X (map grid) return X, Y (canvas space)
-	var get_hex_coord = function(y, x) {
-		return [(x * offset) + jag(y), y * offset * 0.865]
-	}
-
-	var jag = function(row) {
-		if (row % 2 == 0) {
-			return 0
-		} else {
-			return offset / 2
-		}
-	}
 
 	var hexes = [];
 
 	// build hex grid
 	(function(hexes) {
-		for (var y = 1; y <= num_hexes_tall; y++) {
+		for (var y = 1; y <= map_constants.num_hexes_tall; y++) {
 			hexes[y] = []
-			for (var x = 1; x <= num_hexes_wide; x++) {
-				var coord = get_hex_coord(y, x)
+			for (var x = 1; x <= map_constants.num_hexes_wide; x++) {
+				var coord = get_xy(y, x)
 				var new_hex = hex(coord[0], coord[1])
 				new_hex.map_coords = [y, x]
 				new_hex.attr({title: y + ':' + x})
@@ -56,8 +66,8 @@ var build_map = function(paper, debug) {
 	var draw_hexnum = function() {
 		for (var x = 1; x < 20; x++) {
 			for (var y = 1; y < 14; y++) {
-				var point = get_hex_coord(y, x)
-				paper.text(point[0] + start_x, point[1] + start_y, y + ":" + x)
+				var point = get_xy(y, x)
+				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, y + ":" + x)
 			}
 		}
 	}
@@ -127,8 +137,12 @@ var build_map = function(paper, debug) {
 		for (var city in major_cities) {
 			var point = major_cities[city]
 			hexes[point[0]][point[1]].attr({fill : '#5E5E5E'})
-			point = get_hex_coord(point[0], point[1])
-			paper.text(point[0] + start_x, point[1] + start_y, city)
+			point = get_xy(point[0], point[1])
+			// the city names clutter things up when we've also printed the map
+			// coordinates on every hex
+			if (!debug) {
+				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, city)
+			}
 		}
 	})();
 
@@ -163,8 +177,13 @@ var build_map = function(paper, debug) {
 		for (var city in minor_cities) {
 			var point = minor_cities[city]
 			hexes[point[0]][point[1]].attr({fill : '#D1CDCD'})
-			point = get_hex_coord(point[0], point[1])
-			paper.text(point[0] + start_x, point[1] + start_y, city)
+			point = get_xy(point[0], point[1])
+			// the city names clutter things up when we've also printed the map
+			// coordinates on every hex
+			if (!debug) {
+				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, city)
+			}
+
 		}
 	})();
 
@@ -249,11 +268,11 @@ var build_map = function(paper, debug) {
 
 	// TODO: rivers
 	(function() {
-		var point = get_hex_coord(7, 1)
-		point[0] += 2.12 * width
-		point[1] += 0.75 * width
+		var point = get_xy(7, 1)
+		point[0] += 2.12 * map_constants.width
+		point[1] += 0.75 * map_constants.width
 		var start = 'M' + (point[0]) + ' ' + (point[1])
-		var end = 'L' + (point[0]) + ' ' + (point[1] + width)
+		var end = 'L' + (point[0]) + ' ' + (point[1] + map_constants.width)
 		var river = paper.path(start + end)
 		river.attr({stroke : 'red', 'stroke-width' : 5})
 	})();
