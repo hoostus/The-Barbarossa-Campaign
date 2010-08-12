@@ -11,6 +11,14 @@ var map_constants = {
 	rect_offset : 25
 }
 
+var make_rect = function(y, x, paper) {
+	var point = get_xy(y, x)
+	return paper.rect(point[0] + map_constants.rect_offset,
+		point[1] + map_constants.rect_offset, 
+		map_constants.rect_size,
+		map_constants.rect_size)
+	}
+
 // given Y, X (map grid) return X, Y (canvas space)
 var get_xy = (function() {
 	var offset = 1.77 * map_constants.width
@@ -67,7 +75,7 @@ var build_map = function(paper, debug) {
 		for (var x = 1; x < 20; x++) {
 			for (var y = 1; y < 14; y++) {
 				var point = get_xy(y, x)
-				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, y + ":" + x)
+				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, y + ":" + x).toBack()
 			}
 		}
 	}
@@ -141,7 +149,7 @@ var build_map = function(paper, debug) {
 			// the city names clutter things up when we've also printed the map
 			// coordinates on every hex
 			if (!debug) {
-				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, city)
+				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, city).toBack()
 			}
 		}
 	})();
@@ -181,7 +189,7 @@ var build_map = function(paper, debug) {
 			// the city names clutter things up when we've also printed the map
 			// coordinates on every hex
 			if (!debug) {
-				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, city)
+				paper.text(point[0] + map_constants.start_x, point[1] + map_constants.start_y, city).toBack()
 			}
 
 		}

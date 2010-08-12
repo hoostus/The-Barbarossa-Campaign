@@ -26,7 +26,25 @@ class Scenario(object):
 
 		raise Exception('Abstract Base Class method')
 
+	def starting_pieces(self):
+		""" Return a list of tuples for the soviet starting positions """
+		raise Exception('Abstract Base Class method')
+
 class Barbarossa(Scenario):
+	def __init__(self):
+		self.ussr_line = [
+			[1, 8], [2, 8],
+			[5, 4], [5, 5], [6, 6], [7, 5], [8, 6], [9, 6],
+			[10, 6], [10, 7], [10, 8], [11, 8], [12, 9]
+		]
+
+		self.sevastopol = 'fortified'
+
+		self.finns = [[1, 7], [2, 7]]
+
+		self.rumanian_setup = [[12, 8], [11, 7], [11, 6]]
+		self.german_setup = [[6, 5], [7, 4], [8, 5], [9, 5]]
+
 	def setup(self, game):
 		game.turn = 1
 		game.phase = 1
@@ -46,18 +64,12 @@ class Barbarossa(Scenario):
 
 		game.state = 'setup'
 
-		self.ussr_line = [
-			[1, 8], [2, 8],
-			[5, 4], [5, 5], [6, 6], [7, 5], [8, 6], [9, 6],
-			[10, 6], [10, 7], [10, 8], [11, 8], [12, 9]
-		]
+	def starting_pieces(self):
+		return {
+			'ussr_line': self.ussr_line,
+			'finnish' : self.finns
+		}
 
-		self.sevastopol = 'fortified'
-
-		self.finns = [[1, 7], [2, 7]]
-
-		self.rumanian_setup = [[12, 8], [11, 7], [11, 6]]
-		self.german_setup = [[6, 5], [7, 4], [8, 5], [9, 5]]
 
 class FallBlau(Scenario):
 	def setup(self, game):

@@ -6,6 +6,7 @@ from google.appengine.ext.webapp import util, template
 
 import os
 import cgi
+import json
 
 from flash import Flash
 from model import Game
@@ -49,9 +50,6 @@ class SelectScenario(webapp.RequestHandler):
 			game = Game.get_by_key_name(user.user_id())
 
 			if game:
-				self.flash = Flash()
-				self.flash.msg = ['You cannot select a scenario.',
-						'You already have a game in progress.']
 				self.redirect('/play')
 			else:
 				scenario_name = self.request.get('scenario')
@@ -64,10 +62,24 @@ class SelectScenario(webapp.RequestHandler):
 				game.put()
 				self.redirect('/play')
 
+class Setup(webapp.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		if not user:
+			raise Exception('Anonymous not allowed')
+
+		game = Game.get_by_key_name(user.user_id())
+		if not game:
+			raise Exception('No game for user %s' % user.user_id())
+
+		s = scenario.get_scenario(game.scenario)
+		self.response.out.write(json.dumps(s.starting_pieces()))
+
 def main():
         application = webapp.WSGIApplication([
 		('/', Welcome),
 		('/play', Play),
+		('/setup', Setup),
 		('/select-scenario', SelectScenario),
 	], debug=True)
         util.run_wsgi_app(application)

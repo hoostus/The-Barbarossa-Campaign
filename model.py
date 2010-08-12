@@ -26,7 +26,7 @@ class Game(db.Model):
 	state = db.StringProperty(default='setup',
 			choices=set([ 'setup', 'playing', 'complete' ]))
 
-	scenario = db.StringProperty(default='barbarossa'), # TODO: recursive depend... choices=set(scenario.scenarios.keys()))
+	scenario = db.StringProperty(default='barbarossa') # TODO: recursive depend... choices=set(scenario.scenarios.keys()))
 
 	def finished(self):
 		return self.state == 'complete'

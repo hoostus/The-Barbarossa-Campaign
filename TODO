@@ -1,4 +1,7 @@
 - validate states (i.e. don't allow to SelectGame if in the middle of a game)
+- don't need HEXES. use DOM ids (?)
+- javascript iteration (don't use the for x in y style)
+- centralize all color info somewhere. server side? ajax
 
 MAP
 ===

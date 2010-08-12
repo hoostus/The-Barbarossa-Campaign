@@ -1,9 +1,6 @@
 // vim:ts=8 sw=8 noet
-jQuery(document).ready(function() {
-	var paper = Raphael(0, 0, 2000, 1000);
 
-	hexes = build_map(paper, false)
-
+var player_setup = function(paper, hexes) {
 	jQuery('#step-1').addClass('notice')
 	jQuery('#instructions').dialog({
 		title: 'Instructions',
@@ -31,12 +28,21 @@ jQuery(document).ready(function() {
 		autoOpen: false
 	})
 
-	// 11,6 11,7 12,8
+	var contains = function(collection, element) {
+		for (var i in collection) {
+			if ((collection[i][0] == element[0]) && (collection[i][1] == element[1])) {
+				return true
+			}
+		}
+		return false
+	}
+
 	var invalid = paper.set()
 	var valid = paper.set()
-	for (var y = 1; y < 14; y++) {
-		for (var x = 1; x < 20; x++) {
-			if ((y == 11 && x == 6) || (y == 11 && x == 7) || (y == 12 && x == 8)) {
+	var valid_hexes = [[11, 6], [11, 7], [12, 8]]
+	for (var y = 1; y <= map_constants.num_hexes_tall; y++) {
+		for (var x = 1; x <= map_constants.num_hexes_wide; x++) {
+			if (contains(valid_hexes, [y, x])) {
 				valid.push(hexes[y][x])
 			} else {
 				invalid.push(hexes[y][x])
@@ -61,7 +67,7 @@ jQuery(document).ready(function() {
 		var y = target.raphael.map_coords[0]
 		var x = target.raphael.map_coords[1]
 
-		if ((y == 11 && x == 6) || (y == 11 && x == 7) || (y == 12 && x == 8)) {
+		if (contains(valid_hexes, [y, x])) {
 			return true;
 		} else {
 			return false;
@@ -141,8 +147,38 @@ jQuery(document).ready(function() {
 
 	// TODO: make previous unit types undraggable (i.e. when going to special, make rumanian undraggable
 	// TODO: valid drop targets for special and panzer
-	// TODO: fill in Finns (before)
-	// TODO: fill in USSR (before)
 	// TODO: fill in German line (after)
 	// TODO: add a "done" that posts all the data back
+
+}
+
+var draw_pieces = function(paper, pieces) {
+	for (var key in pieces) {
+		var units = pieces[key]
+		for (var i = 0; i < units.length; i++) {
+			var position = units[i]
+			var unit = make_rect(position[0], position[1], paper)
+			var color = function(key) {
+				if (key == 'finnish') { return '#F0EAE6' }
+				else if (key == 'ussr_line') { return 'red' }
+			}(key)
+			unit.attr({fill: color})
+		}
+	}
+}
+
+jQuery(document).ready(function() {
+	var paper = Raphael(0, 0, 2000, 1000);
+	hexes = build_map(paper, false)
+
+	jQuery.ajax({
+		url: '/setup',
+		async: false,
+		dataType: 'json',
+		success: function(pieces) {
+			draw_pieces(paper, pieces)
+		}
+	})
+
+	player_setup(paper, hexes)
 })
