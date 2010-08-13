@@ -11,6 +11,14 @@ var map_constants = {
 	rect_offset : 25
 }
 
+var for_all = function(fn) {
+	for (var y = 1; y <= map_constants.num_hexes_tall; y++) {
+		for (var x = 1; x <= map_constants.num_hexes_wide; x++) {
+			fn(y, x)
+		}
+	}
+}
+
 var make_rect = function(y, x, paper) {
 	var point = get_xy(y, x)
 	return paper.rect(point[0] + map_constants.rect_offset,
