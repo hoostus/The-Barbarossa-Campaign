@@ -43,7 +43,8 @@ class Barbarossa(Scenario):
 		self.finns = [[1, 7], [2, 7]]
 
 		self.rumanian_setup = [[12, 8], [11, 7], [11, 6]]
-		self.german_setup = [[6, 5], [7, 4], [8, 5], [9, 5]]
+		self.greater_germany_setup = [[6, 5], [7, 4], [8, 5], [9, 5], [10, 5]]
+		self.german_line_setup = self.rumanian_setup + self.greater_germany_setup + [11, 5]
 
 	def setup(self, game):
 		game.turn = 1
@@ -69,7 +70,6 @@ class Barbarossa(Scenario):
 			'ussr_line': self.ussr_line,
 			'finnish' : self.finns
 		}
-
 
 class FallBlau(Scenario):
 	def setup(self, game):
