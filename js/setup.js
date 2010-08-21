@@ -1,10 +1,5 @@
 // vim:ts=8 sw=8 noet
 
-	// TODO: make previous unit types undraggable (i.e. when going to special, make rumanian undraggable
-	// TODO: valid drop targets for special and panzer
-	// TODO: fill in German line (after)
-	// TODO: add a "done" that posts all the data back
-
 var make_all_invalid = function(paper, hexes) {
 	var invalid = paper.set()
 	for_all(function(y, x) {
@@ -48,6 +43,7 @@ var draw_setup_units = function(paper) {
 		for (var i = 0; i < details['count']; i++, x -= increment) {
 			var unit = paper.rect(x, y, map_constants.rect_size, map_constants.rect_size)
 			unit.attr({opacity: 0.3, fill: details['color']})
+			jQuery(unit).addClass(type, 'setup-unit')
 			units[type].push(unit)
 		}
 		y += increment
@@ -88,6 +84,7 @@ var do_setup = function(paper, hexes, units, allowed_hexes, post) {
 
 		var point = get_xy(y, x)
 		var unit = units.pop()
+		debugger;
 		unit.animate({x : point[0] + map_constants.rect_offset, y : point[1] + map_constants.rect_offset }, 800, '>')
 		if (units.length == 0) {
 			valid.animate({'stroke-width': 1, opacity: 0.2}, 1500, '>')
@@ -164,6 +161,16 @@ jQuery(document).ready(function() {
 						function(used_hexes) {
 							jQuery('#step-3').removeClass('notice')
 							panzer.dialog('destroy')
+							jQuery.ajax({
+								url: '/setup',
+								type: 'POST',
+								contentType: 'application/json',
+								dataType: 'json',
+								data: 123,
+								success: function(data, textStatus, request) {
+									alert(data)
+								}
+							})
 					})
 				})
 		})

@@ -75,6 +75,19 @@ class Setup(webapp.RequestHandler):
 		s = scenario.get_scenario(game.scenario)
 		self.response.out.write(json.dumps(s.starting_pieces()))
 
+	def post(self):
+		user = users.get_current_user()
+		if not user:
+			raise Exception('Anonymous not allowed')
+
+		game = Game.get_by_key_name(user.user_id())
+		if not game:
+			raise Exception('No game for user %s' % user.user_id())
+
+		print self.request.get('setup')
+
+
+
 def main():
         application = webapp.WSGIApplication([
 		('/', Welcome),

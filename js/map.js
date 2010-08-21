@@ -72,7 +72,7 @@ var build_map = function(paper, debug) {
 				var coord = get_xy(y, x)
 				var new_hex = hex(coord[0], coord[1])
 				new_hex.map_coords = [y, x]
-				new_hex.attr({title: y + ':' + x})
+				//new_hex.attr({title: y + ':' + x})
 				hexes[y][x] = new_hex
 			}
 		}
