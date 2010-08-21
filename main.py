@@ -6,7 +6,7 @@ from google.appengine.ext.webapp import util, template
 
 import os
 import cgi
-import json
+from django.utils import simplejson as json # appengine is python 2.5 so we need to use the json that appengine's django comes with
 
 from flash import Flash
 from model import Game
