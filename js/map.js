@@ -58,6 +58,7 @@ var build_map = function(paper, debug) {
 		}, function(event) {
 			this.attr({'stroke-width' : this.ostroke_width})
 		})
+		new_hex.node.setAttribute('class', 'hex')
 		return new_hex
 	}
 
@@ -71,7 +72,8 @@ var build_map = function(paper, debug) {
 			for (var x = 1; x <= map_constants.num_hexes_wide; x++) {
 				var coord = get_xy(y, x)
 				var new_hex = hex(coord[0], coord[1])
-				new_hex.map_coords = [y, x]
+				new_hex.node.id = 'y' + y + 'x' + x
+				//new_hex.map_coords = [y, x]
 				//new_hex.attr({title: y + ':' + x})
 				hexes[y][x] = new_hex
 			}

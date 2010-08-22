@@ -1,5 +1,6 @@
 # vim:ts=8 sw=8 noet
 from model import Piece
+import itertools
 
 class Scenario(object):
 	def setup(self, game):
@@ -38,13 +39,12 @@ class Barbarossa(Scenario):
 			[10, 6], [10, 7], [10, 8], [11, 8], [12, 9]
 		]
 
-		self.sevastopol = 'fortified'
-
+		self.fortified = ['Sevastopol']
 		self.finns = [[1, 7], [2, 7]]
 
-		self.rumanian_setup = [[12, 8], [11, 7], [11, 6]]
+		#self.rumanian_setup = [[12, 8], [11, 7], [11, 6]]
 		self.greater_germany_setup = [[6, 5], [7, 4], [8, 5], [9, 5], [10, 5]]
-		self.german_line_setup = self.rumanian_setup + self.greater_germany_setup + [11, 5]
+		#self.german_line_setup = self.rumanian_setup + self.greater_germany_setup + [11, 5]
 
 	def setup(self, game):
 		game.turn = 1
@@ -63,7 +63,35 @@ class Barbarossa(Scenario):
 		game.soviet_industry_track = 0
 		game.soviet_lend_lease_track = 0
 
-		game.state = 'setup'
+		game.fortified = self.fortified
+
+		# eventually I'll have a proper setup but I need to do some actual
+		# game-code work for a change...so we'll just go with a hard-coded setup
+		# for now
+		#game.state = 'setup'
+		game.state = 'playing'
+
+		for ussr in self.ussr_line:
+			p = Piece(game=game, side='ussr', type='line', y=ussr[0], x=ussr[1])
+			p.put()
+
+		for finn in self.finns:
+			p = Piece(game=game, side='axis', type='finn', y=finn[0], x=finn[1])
+			p.put()
+
+		Piece(game=game, side='axis', type='panzer', y=6, x=5).put()
+		Piece(game=game, side='axis', type='panzer', y=8, x=5).put()
+		Piece(game=game, side='axis', type='panzer', y=9, x=5).put()
+
+		Piece(game=game, side='axis', type='mountain', y=11, x=7).put()
+
+		Piece(game=game, side='axis', type='rumanian', y=11, x=6).put()
+		Piece(game=game, side='axis', type='rumanian', y=12, x=8).put()
+
+		for german in itertools.chain(self.greater_germany_setup, [[11, 5]]):
+			p = Piece(game=game, side='axis', type='line', y=german[0], x=german[1])
+			p.put()
+
 
 	def starting_pieces(self):
 		return {

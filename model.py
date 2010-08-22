@@ -28,6 +28,9 @@ class Game(db.Model):
 
 	scenario = db.StringProperty(default='barbarossa') # TODO: recursive depend... choices=set(scenario.scenarios.keys()))
 
+	fortified = db.StringListProperty()
+	partisans = db.StringListProperty()
+
 	def finished(self):
 		return self.state == 'complete'
 	def setup(self):
@@ -37,6 +40,7 @@ class Game(db.Model):
 
 class Piece(db.Model):
 	game = db.ReferenceProperty(Game, required=True)
-	type = db.StringProperty()
-	x = db.IntegerProperty(required=True, choices=range(1, 20))
+	side = db.StringProperty(required=True, choices=set(['axis', 'ussr']))
+	type = db.StringProperty(default='line')
 	y = db.IntegerProperty(required=True, choices=range(1, 14))
+	x = db.IntegerProperty(required=True, choices=range(1, 20))

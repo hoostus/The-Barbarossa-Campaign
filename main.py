@@ -3,6 +3,7 @@
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util, template
+from google.appengine.ext import db
 
 import os
 import cgi
@@ -58,7 +59,8 @@ class SelectScenario(webapp.RequestHandler):
 					player=user,
 					scenario=scenario_name,
 					historical=(historical == 'on'))
-				scenario.get_scenario(scenario_name).setup(game)
+				s = scenario.get_scenario(scenario_name)
+				s.setup(game)
 				game.put()
 				self.redirect('/play')
 
@@ -85,8 +87,6 @@ class Setup(webapp.RequestHandler):
 			raise Exception('No game for user %s' % user.user_id())
 
 		print self.request.get('setup')
-
-
 
 def main():
         application = webapp.WSGIApplication([
